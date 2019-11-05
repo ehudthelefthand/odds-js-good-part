@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Todo App</title>
   <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="main.js"></script>
   <style>
     html {
       box-sizing: border-box;
@@ -58,30 +59,6 @@
     <button>Add</button>
   </form>
   <ul id="todo-list"></ul>
-  <script>
-    var form = document.getElementById("todo-form");
-    var todo = document.getElementById("todo");
-    var todoList = document.getElementById("todo-list");
-    var todos = [];
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      todos.push(todo.value);
-      todo.value = "";
-      render();
-      // alert(event.target.elements[0].value);
-    });
-
-    function render() {
-      todoList.innerHTML = "";
-      for (var item of todos) {
-        var li = document.createElement("li");
-        li.textContent = item;
-        todoList.appendChild(li);
-      }
-    }
-
-  </script>
 </body>
 
 </html>
