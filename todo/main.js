@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    todos.push(todo.value);
+    var text = todo.value.trim();
+    if (text.length === 0) {
+      return;
+    }
+    todos.push({ id: Date.now(), text: text, done: false });
     save(TODO_STORAGE_KEY, todos);
     todo.value = "";
     render();
@@ -25,27 +29,66 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function todoElem(item) {
-    var text = document.createElement("span");
-    text.textContent = item;
-    text.addEventListener("click", function () {
-      alert("done!")
+    var text = elem("span", {
+      classes: ["text"],
+      text: item.text,
     });
-    var icon = document.createElement("span");
-    icon.classList.add("fa", "fa-trash-o", "delete");
-    icon.addEventListener("click", function () {
-      deleteTodo(item);
-      render();
+
+    var icon = elem("span", {
+      classes: ["fa", "fa-trash-o", "delete"],
+      handle: {
+        event: "click",
+        fn: function () {
+          deleteTodo(item);
+          render();
+        }
+      }
     });
-    var li = document.createElement("li");
+
+    var li = elem("li", {
+      classes: ["todo-item", item.done && "done"],
+      handle: {
+        event: "click",
+        fn: function () {
+          toggleTodo(item);
+          render();
+        }
+      }
+    });
+
     li.appendChild(text);
     li.appendChild(icon);
-    li.classList.add("todo-item");
+
     return li;
+  }
+
+  function elem(tagName, { classes, handle, text }) {
+    var elem = document.createElement(tagName);
+    if (classes) {
+      elem.classList.add(...classes);
+    }
+    if (handle) {
+      elem.addEventListener(handle.event, handle.fn);
+    }
+    if (text) {
+      elem.textContent = text;
+    }
+    return elem;
   }
 
   function deleteTodo(item) {
     todos = todos.filter(function (todo) {
-      return todo != item;
+      return todo.id != item.id;
+    });
+    save(TODO_STORAGE_KEY, todos);
+  }
+
+  function toggleTodo(item) {
+    todos = todos.map(function (todo) {
+      if (todo.id === item.id) {
+        todo.done = !todo.done;
+      }
+      return todo;
     });
     save(TODO_STORAGE_KEY, todos);
   }

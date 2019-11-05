@@ -55,6 +55,12 @@ ul > li {
   border-radius: 5px;
 }
 
+li.done > .text {
+  text-decoration: line-through;
+  color: #999;
+  font-style: italic;
+}
+
 li:hover {
   background: #eee;
 }
