@@ -1,0 +1,31 @@
+<html>
+
+<body onload=checkscope();>
+    <script type="text/javascript">
+        var name = "Ali";
+        var money;
+        money = 2000.50;
+        var myVar = "global";      // Declare a global variable
+        function checkscope() {
+            var myVar = "local";    // Declare a local variable
+            document.write(myVar);
+        }
+    </script>
+</body>
+
+</html>
+
+<!--
+let:: es6 block scope
+for( let j = 0; j < 3; j++ ) {
+    console.log(j);
+};
+console.log(j); // ไม่สามารถอ้างอิงแบบนี้ได้
+
+var: การประกาศตัวแปรแบบ function scope, global scope
+
+for( var i= 0; i < 3; i++ ) {
+    console.log(i);
+};
+console.log(i); //ค่า i จะเท่ากับ 3
+-->

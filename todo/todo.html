@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo App</title>
+  <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+  <style>
+    html {
+      box-sizing: border-box;
+      font-size: 18px;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    form {
+      display: flex;
+    }
+
+    body {
+      font-size: 18px;
+    }
+
+    input,
+    button {
+      display: inline-block;
+      border: 2px solid black;
+      margin: 5px;
+    }
+
+    button {
+      width: 100px;
+      height: 50px;
+      color: #fff;
+      background: #000;
+    }
+
+    input {
+      width: 200px;
+      height: 50px;
+      padding: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="todo-form">
+    <input type="text" name="todo" id="todo" autofocus>
+    <button>Add</button>
+  </form>
+  <ul id="todo-list"></ul>
+  <script>
+    var form = document.getElementById("todo-form");
+    var todo = document.getElementById("todo");
+    var todoList = document.getElementById("todo-list");
+    var todos = [];
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      todos.push(todo.value);
+      todo.value = "";
+      render();
+      // alert(event.target.elements[0].value);
+    });
+
+    function render() {
+      todoList.innerHTML = "";
+      for (var item of todos) {
+        var li = document.createElement("li");
+        li.textContent = item;
+        todoList.appendChild(li);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
