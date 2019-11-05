@@ -27,8 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function todoElem(item) {
     var text = document.createElement("span");
     text.textContent = item;
+    text.addEventListener("click", function () {
+      alert("done!")
+    });
     var icon = document.createElement("span");
-    icon.classList.add("fa", "fa-trash-o");
+    icon.classList.add("fa", "fa-trash-o", "delete");
     icon.addEventListener("click", function () {
       deleteTodo(item);
       render();

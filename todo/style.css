@@ -42,10 +42,30 @@ input {
 
 ul {
   list-style-type: none;
+  padding-left: 10px;
 }
 
 ul > li {
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
+  align-content: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+li:hover {
+  background: #eee;
+}
+
+.delete {
+  border: 2px solid #000;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.delete:hover {
+  color: #fff;
+  background: #000;
 }
