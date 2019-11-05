@@ -39,3 +39,13 @@ input {
   height: 50px;
   padding: 5px;
 }
+
+ul {
+  list-style-type: none;
+}
+
+.todo-item {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}

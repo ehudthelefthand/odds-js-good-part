@@ -20,10 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
   function render() {
     todoList.innerHTML = "";
     for (var item of todos) {
-      var li = document.createElement("li");
-      li.textContent = item;
+      var li = todoElem(item);
       todoList.appendChild(li);
     }
+  }
+
+  function todoElem(item) {
+    var text = document.createElement("span");
+    text.textContent = item;
+    var icon = document.createElement("span");
+    icon.classList.add("fa", "fa-trash-o");
+    var li = document.createElement("li");
+    li.appendChild(text);
+    li.appendChild(icon);
+    li.classList.add("todo-item");
+    return li;
   }
 
   function save(key, todos) {
