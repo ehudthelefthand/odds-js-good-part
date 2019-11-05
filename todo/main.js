@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     save(TODO_STORAGE_KEY, todos);
     todo.value = "";
     render();
-    // alert(event.target.elements[0].value);
   });
 
   function render() {
@@ -30,11 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
     text.textContent = item;
     var icon = document.createElement("span");
     icon.classList.add("fa", "fa-trash-o");
+    icon.addEventListener("click", function () {
+      deleteTodo(item);
+      render();
+    });
     var li = document.createElement("li");
     li.appendChild(text);
     li.appendChild(icon);
     li.classList.add("todo-item");
     return li;
+  }
+
+  function deleteTodo(item) {
+    todos = todos.filter(function (todo) {
+      return todo != item;
+    });
+    save(TODO_STORAGE_KEY, todos);
   }
 
   function save(key, todos) {

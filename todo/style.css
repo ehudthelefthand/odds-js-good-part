@@ -44,7 +44,7 @@ ul {
   list-style-type: none;
 }
 
-.todo-item {
+ul > li {
   width: 250px;
   display: flex;
   justify-content: space-between;
