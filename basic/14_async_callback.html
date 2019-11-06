@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    var urls = ['url1', 'url2', 'url3'];
+    var images = [];
+
+    function loadImage(url, callback) {
+      setTimeout(function () {
+        callback(`image for ${url} is loaded`);
+      }, 2000);
+    }
+
+    function loadAll() {
+      let count = urls.length;
+      console.log(count);
+
+      urls.forEach(function (url) {
+        loadImage(url, function (data) {
+          images.push(data);
+          count = count - 1;
+          console.log(count);
+          if (count === 0) {
+            processImage(images);
+          }
+        });
+      });
+    }
+
+    function processImage(images) {
+      console.log('processing images...');
+      images.forEach(console.log);
+    }
+
+    // test by call function 
+    // loadAll();
+  </script>
+</body>
+
+</html>

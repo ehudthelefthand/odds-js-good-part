@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    var urls = ['url1', 'url2', 'url3'];
+    var images = [];
+
+    function loadImage(url) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve(`image for ${url} is loaded`);
+        }, 2000);
+      });
+    }
+
+    async function loadAll() {
+      try {
+        for (let i = 0; i < urls.length; i++) {
+          var image = await loadImage(urls[i]);
+          images.push(image);
+        }
+        processImage(images);
+      } catch (e) {
+        // handle error
+      }
+    }
+
+    function processImage(images) {
+      console.log('processing images...');
+      images.forEach(console.log);
+    }
+
+    // test by call function 
+    // loadAll();
+
+    function doA() {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve("result A");
+        }, 1000);
+      });
+    }
+
+    function doB(resultA) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve(`result B with ${resultA}`);
+        }, 1000);
+      });
+    }
+
+    function doC(resultB) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          resolve(`result C with ${resultB}`);
+        }, 1000);
+      });
+    }
+
+    async function doAll() {
+      try {
+        var resultA = await doA();
+        var resultB = await doB(resultA);
+        var resultC = await doC(resultB);
+        console.log(resultC);
+      } catch (e) {
+        // handle error
+      }
+    }
+  </script>
+</body>
+
+</html>
